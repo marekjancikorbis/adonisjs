@@ -13,17 +13,17 @@ export default class GuestMiddleware {
   /**
    * The URL to redirect to when user is logged-in
    */
-  redirectTo = '/'
+  redirectTo = '/dashboard'
 
   async handle(
     ctx: HttpContext,
     next: NextFn,
-    options: { guards?: (keyof Authenticators)[] } = {}
+    options: { guards?: (keyof Authenticators)[]; redirectTo?: string } = {}
   ) {
     for (let guard of options.guards || [ctx.auth.defaultGuard]) {
       if (await ctx.auth.use(guard).check()) {
         ctx.session.reflash()
-        return ctx.response.redirect(this.redirectTo, true)
+        return ctx.response.redirect(options.redirectTo ?? this.redirectTo, true)
       }
     }
 

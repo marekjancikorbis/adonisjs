@@ -17,6 +17,14 @@ export const signupValidator = vine.create({
 })
 
 /**
+ * Signup for the bare /signup1 system, unique against its own database
+ */
+export const signupValidator1 = vine.create({
+  email: email().unique({ table: 'users', column: 'email', connection: 'sqlite1' }),
+  password: password(),
+})
+
+/**
  * Validator to use before validating user credentials
  * during login
  */

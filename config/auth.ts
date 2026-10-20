@@ -32,6 +32,16 @@ const authConfig = defineConfig({
         model: () => import('#models/user'),
       }),
     }),
+
+    /**
+     * Guard for the bare login system (/login1). Separate users and session.
+     */
+    web1: sessionGuard({
+      useRememberMeTokens: false,
+      provider: sessionUserProvider({
+        model: () => import('#models/user1'),
+      }),
+    }),
   },
 })
 

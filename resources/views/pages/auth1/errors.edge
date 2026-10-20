@@ -1,0 +1,6 @@
+@each((messages, field) in flashMessages.get('inputErrorsBag', {}))
+  <p>{{ messages.join(', ') }}</p>
+@end
+@each((message, code) in flashMessages.get('errorsBag', {}))
+  <p>{{ message }}</p>
+@end

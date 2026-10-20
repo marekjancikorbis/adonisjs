@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Dashboard</title>
+</head>
+<body>
+  <h1>Dashboard</h1>
+  <p>Logged in as {{ me.email }}</p>
+
+  <form method="POST" action="{{ urlFor('logout1') }}">
+    {{ csrfField() }}
+    <button type="submit">Log out</button>
+  </form>
+
+  <h2>All users ({{ users.length }})</h2>
+  <table border="1">
+    <thead>
+      <tr><th>ID</th><th>Email</th><th>Signed up</th></tr>
+    </thead>
+    <tbody>
+      @each(user in users)
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.createdAt.toFormat('yyyy-MM-dd HH:mm') }}</td>
+        </tr>
+      @end
+    </tbody>
+  </table>
+</body>
+</html>

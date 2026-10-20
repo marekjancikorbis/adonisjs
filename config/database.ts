@@ -37,6 +37,24 @@ const dbConfig = defineConfig({
     },
 
     /**
+     * Separate database for the bare login system (/login1, /signup1, /dashboard1).
+     */
+    sqlite1: {
+      client: 'better-sqlite3',
+      connection: {
+        filename: app.tmpPath('db1.sqlite3'),
+      },
+      useNullAsDefault: true,
+      migrations: {
+        naturalSort: true,
+        paths: ['database/migrations1'],
+      },
+      // Off: it would overwrite database/schema.ts (generated from the main db)
+      schemaGeneration: { enabled: false },
+      debug: app.inDev,
+    },
+
+    /**
      * PostgreSQL connection.
      * Install package to switch: npm install pg
      */
